@@ -4,8 +4,8 @@
 #pragma warning(disable: 4996)
 using namespace std;
  
-struct Elem {
-    int key;
+struct Elem {              //создаем список
+    int key;                    
     Elem* pnext;
     static unsigned siz;
 };
@@ -13,30 +13,30 @@ struct Elem {
 unsigned Elem::siz = 0;
  
 int first_elem(Elem* *pbeg, Elem* *pend, int d) {
-    Elem* ph = new Elem;
-    ph->key = d;
-    ph->pnext = 0;
+    Elem* ph = new Elem; 
+    ph->key = d;     
+    ph->pnext = 0;                 //работа с первым элементом
     *pbeg = ph;
     *pend = ph;
-    ++Elem::siz;
+    ++Elem::siz;  //"размер" списка
  
     return 0;
 }
-int add_elem(Elem** pend, int d) {
+int add_elem(Elem** pend, int d) {         
     Elem* ph = new Elem;
     ph->key = d;
-    ph->pnext = 0;
+    ph->pnext = 0;                    
     (*pend)->pnext = ph;
     *pend = ph;
     ++Elem::siz;
 
     return 0;
 }
-    int del_elem (Elem * pbeg, int k) {
+    int del_elem (Elem * pbeg, int k) {       //ставит перед удаляемым элементом другой элемент(вводишь сам значение)
         int n;
         cout << "Введите ключ нового элемента списка: "; cin >> n;
 
-        while (pbeg) {
+        while (pbeg) {                   
             if (pbeg->key == k) {
                 Elem* ph = new Elem;
 
@@ -52,10 +52,10 @@ int add_elem(Elem** pend, int d) {
             pbeg = pbeg->pnext;
         }
 
-        return 1;
+        return 0;
     }
 
-int del_elem(Elem* *pbeg, Elem* *pend, int k) {
+int del_elem(Elem* *pbeg, Elem* *pend, int k) {   // удаление элемента, который задали удалить
     Elem* tmp = *pbeg;
     if (!*pbeg) {
         cout << "Ошибка: список пуст" << endl;
@@ -92,9 +92,9 @@ int del_elem(Elem* *pbeg, Elem* *pend, int k) {
             return 0;
         }
     }
-    return 1;
+    return 0;
 }
-void del_list(Elem *pbeg) {
+void del_list(Elem *pbeg) {      //удаляем список
     if (pbeg != NULL) {
         del_list(pbeg->pnext);
         delete pbeg;
@@ -103,7 +103,7 @@ void del_list(Elem *pbeg) {
     }
 }
 
-void print_elem(Elem *pbeg) {
+void print_elem(Elem *pbeg) {   //вывод списка
     Elem* ph = pbeg;
     while (ph) {
         cout << ph->key << ' ';
@@ -111,7 +111,7 @@ void print_elem(Elem *pbeg) {
     }
     cout << endl;
 }
-int main() {
+int main() {                      //сама прога
     setlocale(LC_ALL, "Russian");
     Elem* pbeg = 0;
     Elem* pend = 0;
